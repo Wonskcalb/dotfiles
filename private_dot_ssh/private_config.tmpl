@@ -1,0 +1,18 @@
+Host github.com
+    HostName github.com
+    IdentityFile ~/.ssh/identities/perso/github
+
+Host gitlab.com
+    Hostname gitlab.com
+    IdentityFile ~/.ssh/identities/perso/gitlab
+
+Host vps
+    Hostname {{ (index (bitwarden "item" "VPS SSH").login.uris 0).uri }}
+    User {{ (bitwarden "item" "VPS SSH").login.username }}
+    Port {{ (bitwardenFields "item" "VPS SSH").port.value }}
+    IdentityFile ~/.ssh/identities/perso/vps
+
+Host NAS
+    Hostname {{ (index (bitwarden "item" "NAS SSH").login.uris 0).uri }}
+    User {{ (bitwarden "item" "NAS SSH").login.username }}
+    Port {{ (bitwardenFields "item" "NAS SSH").port.value }}
