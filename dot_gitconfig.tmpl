@@ -1,0 +1,47 @@
+[alias]
+	ach = commit --amend -C HEAD
+	amend = commit --amend
+	cp = cherry-pick
+	d = diff
+	dc = diff --cached
+	fixup = commit --fixup
+	l = "!f() { git log --oneline --graph --decorate -n ${1:-20} ${@:2}; }; f"
+	lg = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset)%C(white) - %s - %an %C(bold green)(%ar)%C(reset)%n''          %C(auto)%d%C(reset)'
+	lga = lg --all
+	rc = rebase --continue
+	ria = rebase -i --autosquash
+	s = status
+	t = "!f() { git log --oneline --graph --decorate --branches ${@}; }; f"
+	top = "!f() { git l 1; }; f"
+	undo = reset --soft HEAD~1
+	ust = reset HEAD .
+	mr = !sh -c 'git fetch origin merge-requests/$1/head:mr-origin-$1 && git checkout mr-origin-$1' -
+	unstage = restore --staged
+[core]
+	pager = diff-so-fancy | less --tabs=4 -RFX
+	excludesfile = ~/.gitignore
+	attributesfile = {{ .chezmoi.homeDir }}/.gitattributes
+[user]
+	email = {{ .email }}
+	name = Valentin Famelart
+[includeIf "gitdir:~/Documents/Invenis/"]
+	email = {{ .email }}
+	name = Valentin Famelart
+[color]
+	ui = true
+[color "diff-highlight"]
+	oldNormal = red bold
+	oldHighlight = red bold 52
+	newNormal = green bold
+	newHighlight = green bold 22
+[color "diff"]
+	meta = yellow
+	frag = magenta bold
+	commit = yellow bold
+	old = red bold
+	new = green bold
+	whitespace = red reverse
+[pull]
+	rebase = true
+[init]
+	defaultBranch = main
