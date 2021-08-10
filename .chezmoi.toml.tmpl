@@ -1,0 +1,22 @@
+encryption = "age"
+
+{{- $email := promptString "Enter your email" -}}
+{{- $work_name := promptString "What is the company name" -}}
+{{- $age_recipient := promptString "Age recipient key" -}}
+
+{{ $personal := promptBool "Is this a personal machine?" }}
+{{ $work := not $personal }}
+
+
+[age]
+    identity = "/home/{{ .chezmoi.username }}/key.txt"
+    recipient = ""
+
+[data]
+    email = {{ $email | quote  }}
+    personal = {{ $personal }}
+    work = {{ $work }}
+
+    {{ if $work }}
+        work_name = {{ $work_name | quote }}
+    {{ end }}
