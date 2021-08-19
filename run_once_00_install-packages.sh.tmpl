@@ -1,0 +1,53 @@
+#!/bin/sh
+BREW_TAPS=(
+    "filippo.io/age https://filippo.io/age"
+)
+
+BASE_PKGS="neovim zsh tree ripgrep pyenv pyenv-virtualenv bat fzf htop glances diff-so-fancy age"
+
+EXTRA_MACOS_PKGS="git bitwarden-cli"
+# Git will be installed automatically for Archlinux
+EXTRA_ARCH_PKGS="bitwarden-cli-bin"
+
+set -e  # Exist on error
+
+{{ if (eq .chezmoi.osRelease.id "arch") or (eq .chezmoi.osRelease.idLike "arch") }}
+# ------------------------------------------------------------------------------
+# Archlinux package installation
+# ------------------------------------------------------------------------------
+
+# Install yay if it's not available yet
+if ! which "yay" > /dev/null ; then
+    echo "Yay is missing, installing ..."
+    sudo pacman -S git
+    git clone https://aur.archlinux.org/yay.git
+    cd yay
+    makepkg -si
+fi
+
+echo "Installing packages ..."
+yay -Sy $BASE_PKGS $EXTRA_ARCH_PKGS
+
+{{ else if eq .chezmoi.os "darwin" }}
+# ------------------------------------------------------------------------------
+# MacOS package installation
+# ------------------------------------------------------------------------------
+
+# Check if brew is installed
+if ! which brew; then
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+fi
+
+for $TAP in $BREW_TAPS; do
+    brew tap $TAP
+done
+
+brew install $BASE_PKGS $EXTRA_MACOS_PKGS
+
+{{ else }}
+# ------------------------------------------------------------------------------
+# Unsupported OS
+# ------------------------------------------------------------------------------
+echo "Unsupported OS!"
+
+{{ end }}
