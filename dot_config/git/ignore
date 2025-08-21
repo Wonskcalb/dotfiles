@@ -1,0 +1,8 @@
+out*
+
+.vscode/
+.scannerwork/
+Session.vim
+.idea
+.mutmut-cache/
+.DS_Store

@@ -1,0 +1,14 @@
+README.md
+
+# Anything work related should be listed here 
+{{- if not .isWorkMachine }}
+.config/git/work-main-config
+.config/shell/work.zsh
+.ssh/work_config
+{{- end }}
+
+# Ignore platform specific files
+{{ if ne .chezmoi.os "darwin" }}
+.config/btop
+{{ end }}
+

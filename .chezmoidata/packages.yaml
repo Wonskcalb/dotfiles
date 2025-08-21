@@ -1,0 +1,46 @@
+# Check how to install lunarvim
+
+packages:
+  # base:
+  #   - bat
+  #   - diff-so-fancy
+  #   - fzf
+  #   - neovim
+  #   - ripgrep
+  #   - tree
+  #   - zsh
+
+  darwin:
+    brews:
+      - 'asdf'
+      - 'bat'
+      - 'btop'
+      - 'comby'
+      - 'bitwarden-cli'
+      - 'diff-so-fancy'
+      - 'dive'
+      - 'direnv'
+      - 'duckdb'
+      - 'fd'
+      - 'fzf'
+      - 'git'
+      - 'gnupg'
+      - 'helm'
+      - 'jq'
+      - 'neovim'
+      - 'oh-my-posh'
+      - 'ouch'
+      - 'pandoc'
+      - 'pinentry'
+      - 'pinentry-mac'
+      - 'ripgrep'
+      - 'sqlite'
+      - 'tree'
+      - 'yq'
+      - 'zoxide'
+      - 'pyright'
+
+    casks:
+      - 'ghostty'
+      - 'orbstack'
+      - 'Arc'

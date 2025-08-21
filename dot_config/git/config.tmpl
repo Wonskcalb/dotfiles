@@ -1,0 +1,67 @@
+[core]
+	pager = diff-so-fancy | less --tabs=4 -RFX
+  # excludesFile = {{ .chezmoi.homeDir }}/.gitignore
+  attributesfile = {{ .chezmoi.homeDir }}/.gitattributes
+
+[init]
+	defaultBranch = main
+[push]
+	autoSetupRemote = true
+[pull]
+	rebase = true
+
+{{ if .isWorkMachine }}
+[includeIf "gitdir:{{ .chezmoi.homeDir }}/Documents/work/**"]
+  path = {{ .chezmoi.homeDir }}/.config/git/work-main-config
+{{ end }}
+[includeIf "gitdir:{{ .chezmoi.homeDir }}/Documents/perso/**"]
+  path = {{ .chezmoi.homeDir }}/.config/git/perso-config
+
+[alias]
+	ach = commit --amend -C HEAD
+	amend = commit --amend
+	cp = cherry-pick
+	d = diff
+	dc = diff --cached
+  # fixup = commit --fixup
+	l = "!f() { git log --oneline --graph --decorate -n ${1:-20}; }; f"
+	lg = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset)%C(white) - %s - %an %C(bold green)(%ar)%C(reset)%n''          %C(auto)%d%C(reset)'
+	lga = lg --all
+	rc = rebase --continue
+	ria = rebase -i --autosquash
+	s = status
+	t = "!f() { git log --oneline --graph --decorate --branches ${@}; }; f"
+	top = "!f() { git l 1; }; f"
+	undo = reset --soft HEAD~1
+	ust = reset HEAD .
+	mr = !sh -c 'git fetch origin merge-requests/$1/head:mr-origin-$1 -f && git checkout mr-origin-$1 -f ' -
+	unstage = restore --staged
+
+[color]
+	ui = true
+
+[color "diff-highlight"]
+	oldNormal = red bold
+	oldHighlight = red bold 52
+	newNormal = green bold
+	newHighlight = green bold 22
+
+[color "diff"]
+	meta = 11
+	frag = magenta bold
+	commit = yellow bold
+	old = red bold
+	new = green bold
+	whitespace = red reverse
+	func = 146 bold
+
+
+[diff]
+  tool = kompare
+[difftool]
+  prompt = false
+[diff-so-fancy]
+	stripLeadingSymbols = false
+
+[advice]
+	detachedHead = false

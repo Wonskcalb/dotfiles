@@ -1,0 +1,42 @@
+ 
+#!/bin/sh
+
+{{- if .isWorkMachine }}
+
+# Check if key already exists
+if ! gpg --list-secret-keys --keyid-format LONG "{{ .workEmail }}" >/dev/null 2>&1; then
+    echo "Creating new GPG key for {{ .workEmail }}..."
+
+    cat >key.conf <<EOF
+Key-Type: {{ .gpgKeyType }}
+Key-Length: {{ .gpgKeyLength }}
+Subkey-Type: {{ .gpgKeyType }}
+Subkey-Length: {{ .gpgKeyLength }}
+Name-Real: {{ .name }}
+Name-Email: {{ .workEmail}}
+Expire-Date: {{ .gpgExpire }}
+%no-protection
+%commit
+EOF
+
+    gpg --batch --generate-key key.conf
+    rm -f key.conf
+else
+    echo "GPG key for {{ .workEmail }} already exists"
+fi
+
+
+# Export public key for GitHub/GitLab
+PUBKEY_FILE="$HOME/.gnupg/{{ .workEmail }}.pubkey.asc"
+gpg --armor --export "$KEY_ID" > "$PUBKEY_FILE"
+echo "Exported public GPG key to $PUBKEY_FILE"
+
+echo ""
+echo "----- BEGIN PUBLIC KEY -----"
+gpg --armor --export "$KEY_ID"
+echo "----- END PUBLIC KEY -----"
+echo ""
+echo "👉 Copy the above block and paste it into GitHub/GitLab 'GPG Keys' settings."
+
+{{- end }}
+

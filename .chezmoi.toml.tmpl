@@ -1,0 +1,20 @@
+encryption = "age"
+
+{{- $name := promptString "What's your full name" -}}
+{{- $personalEmail := promptString "What's your PERSONAL email" -}}
+{{- $workEmail := promptString "What's your WORK email" -}}
+
+{{ $isWorkMachine := promptBool "Is this a work machine" }}
+
+[data]
+    name = {{ $name | quote }}  
+    personalEmail = {{ $personalEmail | quote }}
+    isWorkMachine = {{ $isWorkMachine }}
+
+    {{- if $isWorkMachine }}
+    workEmail = {{ $workEmail | quote }}
+
+    gpgKeyType = "RSA"
+    gpgKeyLength = 4096
+    gpgExpire = "2y"
+    {{- end }}

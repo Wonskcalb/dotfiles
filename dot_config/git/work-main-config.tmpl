@@ -1,0 +1,23 @@
+[user]
+    name = Valentin Famelart
+    email = {{ .workEmail }}
+
+{{- if .isWorkMachine }}
+
+{{- $email := .workEmail -}}
+{{- $out := output "gpg" "--with-colons" "--keyid-format" "LONG" "--list-secret-keys" $email -}}
+{{- $fpr := regexFind "(?m)^fpr:[^\n]*" $out -}}
+{{- $f := splitList ":" $fpr -}}
+{{- if ge (len $f) 10 }}
+    signingkey = {{ index $f 9 }}
+{{- end }}
+
+[commit]
+    gpgsign = true
+
+[tag]
+    gpgsign = true
+
+{{- end }}
+
+[maintenance]

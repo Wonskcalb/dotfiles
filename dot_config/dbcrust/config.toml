@@ -1,0 +1,23 @@
+default_limit = 100
+expanded_display_default = false
+autocomplete_enabled = true
+explain_mode_default = false
+column_selection_mode_default = false
+column_selection_threshold = 10
+max_recent_connections = 10
+pager_enabled = true
+pager_command = "less -R"
+pager_threshold_lines = 0
+debug_logging_enabled = false
+show_banner = false
+verbosity_level = "Normal"
+multiline_prompt_indicator = ""
+
+[connection]
+host = "localhost"
+port = 5432
+user = "postgres"
+dbname = "postgres"
+save_password = false
+
+[named_queries]

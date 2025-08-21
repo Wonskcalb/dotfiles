@@ -1,0 +1,47 @@
+#!/bin/sh
+
+
+set -e  # Exist on error
+
+{{ if (eq .chezmoi.os "arch") }}
+# ------------------------------------------------------------------------------
+# Archlinux package installation
+# ------------------------------------------------------------------------------
+
+# Install yay if it's not available yet
+if ! which "yay" > /dev/null ; then
+    echo "Yay is missing, installing ..."
+    sudo pacman -S git
+    git clone https://aur.archlinux.org/yay.git
+    cd yay
+    makepkg -si
+fi
+
+# TODO
+
+{{ else if eq .chezmoi.os "darwin" }}
+# ------------------------------------------------------------------------------
+# MacOS package installation
+# ------------------------------------------------------------------------------
+
+# Check if brew is installed
+if ! which brew; then
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+fi
+
+brew bundle --file=/dev/stdin <<EOF
+{{ range .packages.darwin.brews -}}
+brew {{ . | quote }}
+{{ end -}}
+{{ range .packages.darwin.casks -}}
+cask {{ . | quote }}
+{{ end -}}
+EOF
+
+{{ else }}
+# ------------------------------------------------------------------------------
+# Unsupported OS
+# ------------------------------------------------------------------------------
+echo "Unsupported OS!"
+
+{{ end }}

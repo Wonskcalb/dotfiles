@@ -1,0 +1,11 @@
+
+#!/bin/bash
+function _select_git_commit {
+    git log --color --date=short --pretty=format:"%C(34)%h %C(252)%s" origin/HEAD.. \
+    | egrep -v '(squash|fixup)! ' \
+    | fzf --ansi --reverse --preview "echo {} | cut -f 1 -d' ' | xargs -I SHA git show --color=always SHA" \
+    | awk '{ print $1 }'
+}
+COMMIT=${1:-$(_select_git_commit)}
+shift
+git commit --fixup "$COMMIT" "$@"
