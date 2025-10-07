@@ -2,7 +2,7 @@
     name = Valentin Famelart
     email = {{ .workEmail }}
 
-{{- if .isWorkMachine }}
+{{- if .signWorkCommits }}
 
 {{- $email := .workEmail -}}
 {{- $out := output "gpg" "--with-colons" "--keyid-format" "LONG" "--list-secret-keys" $email -}}

@@ -5,11 +5,13 @@ encryption = "age"
 {{- $workEmail := promptString "What's your WORK email" -}}
 
 {{ $isWorkMachine := promptBool "Is this a work machine" }}
+{{ $signWorkCommits := promptBool "Should I sign work commits" }}
 
 [data]
     name = {{ $name | quote }}  
     personalEmail = {{ $personalEmail | quote }}
     isWorkMachine = {{ $isWorkMachine }}
+    signWorkCommits = {{ $signWorkCommits }}
 
     {{- if $isWorkMachine }}
     workEmail = {{ $workEmail | quote }}
