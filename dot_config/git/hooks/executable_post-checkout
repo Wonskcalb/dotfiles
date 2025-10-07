@@ -1,0 +1,13 @@
+#!/usr/bin/env zsh
+
+# Global post-checkout hook: auto gunwip if checking out a WIP commit
+# Hard coded version of this oh my zsh alias 
+# https://github.com/ohmyzsh/ohmyzsh/blob/c6482fa5be724e9504c6ffe92203440e4c3239b5/plugins/git/README.md?plain=1#L182
+
+last_commit_msg=$(git log -1 --pretty="%B" HEAD | head -n1 )
+
+
+if [[ "$last_commit_msg" =~ ^--wip-- ]]; then
+  echo "WIP commit detected: unapplying it..."
+  git reset HEAD~1
+fi
