@@ -18,6 +18,9 @@
 [includeIf "gitdir:{{ .chezmoi.homeDir }}/Documents/perso/**"]
   path = {{ .chezmoi.homeDir }}/.config/git/perso-config
 
+[includeIf "gitdir:~/.local/share/chezmoi/**"]
+  path = /Users/valentinfamelart/.config/git/perso-config
+
 [alias]
 	ach = commit --amend -C HEAD
 	amend = commit --amend
