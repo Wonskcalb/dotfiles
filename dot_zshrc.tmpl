@@ -72,10 +72,13 @@ zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
 . "$HOME/.config/shell/functions.zsh"
 . "$HOME/.config/shell/helm_completion.zsh"
 . "$HOME/.config/shell/kind_completions.zsh"
-. "$HOME/.config/shell/nvm.zsh"
 . "$HOME/.config/shell/nvim.zsh"
 . "$HOME/.config/shell/rye.zsh"
+
+{{- if .isWorkMachine }}
+. "$HOME/.config/shell/nvm.zsh"
 . "$HOME/.config/shell/work.zsh"
+{{- end }}
 
 # Shell integrations
 eval "$(fzf --zsh)"
