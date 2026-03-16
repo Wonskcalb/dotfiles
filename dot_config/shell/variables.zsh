@@ -2,11 +2,11 @@
 export LANG=en_US.UTF-8
 
 # Prefs
-export EDITOR="lvim"
+export EDITOR="nvim"
 
 # Git variables
 export GIT_SSH=$(which ssh)
-export GIT_EDITOR=lvim
+export GIT_EDITOR=$EDITOR
 
 # Use ipdb breakpoints in python
 export PYTHONBREAKPOINT="ipdb.set_trace"
@@ -19,6 +19,7 @@ export FZF_DEFAULT_COMMAND='rg --files'
 export GOPATH="$HOME/go"
 export PATH="$GOPATH/bin:$PATH"
 export PATH="$HOME/.cargo/bin:$PATH"
+export PATH="$HOME/.local/bin:$PATH"
 
 # Bat(cat) theme
 export BAT_THEME="1337"

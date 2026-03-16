@@ -1,23 +1,163 @@
+# DBCrust Configuration File
+# This file contains all available configuration options with their current values.
+# Lines starting with '#' are comments. Uncomment and modify values as needed.
+
+# ================================================================================
+# DISPLAY SETTINGS
+# Control how query results and interface elements are displayed
+# ================================================================================
+
+# Default row limit for query results (default: 100)
 default_limit = 100
+
+# Use expanded display mode by default (default: false)
 expanded_display_default = false
-autocomplete_enabled = true
-explain_mode_default = false
-column_selection_mode_default = false
-column_selection_threshold = 10
-max_recent_connections = 10
-pager_enabled = true
-pager_command = "less -R"
-pager_threshold_lines = 0
-debug_logging_enabled = false
+
+# Show banner on startup (default: false)
 show_banner = false
-verbosity_level = "Normal"
+
+# Show server info on connection (default: true)
+show_server_info = true
+
+# Indicator for multiline prompts (default: empty)
 multiline_prompt_indicator = ""
 
-[connection]
-host = "localhost"
-port = 5432
-user = "postgres"
-dbname = "postgres"
-save_password = false
+# Number of columns to trigger interactive column selection (default: 10)
+# Set to 0 to disable automatic column selection
+column_selection_threshold = 10
 
-[named_queries]
+# Default all columns selected in column selection (true = opt-out, false = opt-in) (default: false)
+column_selection_default_all = false
+
+# Test named queries before saving them (default: true)
+# When enabled, queries are validated by running EXPLAIN before saving
+test_named_query_before_saving = true
+
+# ================================================================================
+# PAGER SETTINGS
+# Configure output paging for large result sets
+# ================================================================================
+
+# Enable pager for large outputs (default: true)
+pager_enabled = true
+
+# Pager command (default: "less -R")
+pager_command = "less -R"
+
+# Lines before triggering pager, 0 = terminal height (default: 0)
+pager_threshold_lines = 0
+
+# ================================================================================
+# FEATURES
+# Enable or disable various features
+# ================================================================================
+
+# Enable SQL autocomplete (default: true)
+autocomplete_enabled = true
+
+# Enable EXPLAIN mode by default (default: false)
+explain_mode_default = false
+
+# Maximum number of recent connections to remember (default: 10)
+max_recent_connections = 10
+
+# ================================================================================
+# TIMEOUT SETTINGS
+# Configure query and metadata operation timeouts
+# ================================================================================
+
+# Query execution timeout in seconds (default: 30)
+query_timeout_seconds = 30
+
+# Metadata query timeout in seconds (default: 10)
+metadata_timeout_seconds = 10
+
+# ================================================================================
+# VECTOR DISPLAY SETTINGS
+# Configure how PostgreSQL vectors (pgvector, embeddings) are displayed
+# ================================================================================
+
+# Display mode: full, truncated, summary, viz (default: truncated)
+[vector_display]
+display_mode = "truncated"
+
+# Number of elements to show at start/end when truncated (default: 5)
+truncation_length = 5
+
+# Width of ASCII viz visualization (default: 40)
+viz_width = 40
+
+# Show summary statistics with other modes (default: false)
+show_statistics = false
+
+# Auto-switch to truncated mode above this dimension count (default: 20)
+dimension_threshold = 20
+
+# Show dimension count in all display modes (default: true)
+show_dimensions = true
+
+# ================================================================================
+# VAULT INTEGRATION
+# HashiCorp Vault credential caching settings
+# ================================================================================
+
+# Enable Vault credential caching (default: true)
+vault_credential_cache_enabled = true
+
+# Renew credentials when this fraction of TTL remains (default: 0.25 = 25%)
+vault_cache_renewal_threshold = 0.25
+
+# Don't cache credentials with TTL less than this (seconds, default: 300)
+vault_cache_min_ttl_seconds = 300
+
+# ================================================================================
+# SSH TUNNEL PATTERNS
+# Automatically open SSH tunnels for hosts matching these patterns
+# Format: "regex_pattern" = "user@ssh_host:port"
+# Supports command substitution with backticks: "pattern" = "user@`command`"
+# ================================================================================
+
+[ssh_tunnel_patterns]
+# Example patterns:
+# ".*\.rds\.amazonaws\.com" = "user@bastion.example.com"
+# "prod-.*\.internal" = "user@`get-bastion-ip.sh`"
+
+# ================================================================================
+# LOGGING CONFIGURATION
+# Configure application logging for debugging
+# ================================================================================
+
+[logging]
+# Log level: "trace", "debug", "info", "warn", "error" (default: info)
+level = "info"
+
+# Output logs to console (default: true)
+console_output = true
+
+# Output logs to file (default: false)
+file_output = false
+
+# Log file path (default: ~/.config/dbcrust/logs/dbcrust.log)
+file_path = "/Users/valentinfamelart/.config/dbcrust/logs/dbcrust.log"
+
+# Maximum log file size in MB before rotation (default: 10)
+max_file_size_mb = 10
+
+# Number of rotated log files to keep (default: 5)
+max_files = 5
+
+# ================================================================================
+# HISTORY CONFIGURATION
+# Configure per-session command history management
+# ================================================================================
+
+[history]
+# Enable per-session history (separate history per connection) (default: true)
+per_session_enabled = true
+
+# Maximum number of history files to keep (default: 50)
+max_history_files = 50
+
+# Clean up old unused history files after N days (default: 90)
+cleanup_after_days = 90
+

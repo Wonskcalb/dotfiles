@@ -42,6 +42,7 @@ alias grep='grep --color'
 unset gcl
 
 # Git aliases to (pretend to) be more productive
+alias gits='git s'  # learn to type thx
 alias gd='git diff'
 alias gdc='git diff --cached'
 alias gcb='git checkout -b'

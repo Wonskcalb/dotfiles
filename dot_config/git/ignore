@@ -6,3 +6,4 @@ Session.vim
 .idea
 .mutmut-cache/
 .DS_Store
+sonar-project.properties

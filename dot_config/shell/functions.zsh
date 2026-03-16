@@ -74,11 +74,3 @@ function fd() {
         popd 1>/dev/null
     fi  
 }
-
-function gimco() {
-  $EDITOR /tmp/commit-msg
-
-  git commit -m "$1($2): $3" -m "$(cat /tmp/commit-msg)" -m "Issue: $4" -m "Changelog: $5"
-
-  rm /tmp/commit-msg
-}
