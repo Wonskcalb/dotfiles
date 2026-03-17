@@ -2,7 +2,7 @@
 	pager = diff-so-fancy | less --tabs=4 -RFX
   # excludesFile = {{ .chezmoi.homeDir }}/.gitignore
   attributesfile = {{ .chezmoi.homeDir }}/.gitattributes
-  hooksPath = /Users/valentinfamelart/.config/git/hooks
+  hooksPath = {{ .chezmoi.homeDir }}/.config/git/hooks
 
 [init]
 	defaultBranch = main
