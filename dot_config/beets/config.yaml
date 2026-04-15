@@ -1,0 +1,9 @@
+plugins: beatport4 musicbrainz chroma
+
+import:
+  write: yes
+  move: yes
+
+
+match:
+    strong_rec_thresh: 0.12
