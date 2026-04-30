@@ -3,5 +3,10 @@
     "allow": [
       "Edit(//tmp/claude/)"
     ]
-  }
+  },
+  "enabledPlugins": {
+    "pyright-lsp@claude-plugins-official": true
+  },
+  "theme": "dark-daltonized",
+  "editorMode": "vim"
 }
