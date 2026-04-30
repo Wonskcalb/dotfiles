@@ -19,9 +19,11 @@ Host vps
     Port {{ (bitwardenFields "item" "VPS SSH").port.value }}
     IdentityFile {{ .chezmoi.homeDir }}/.ssh/vps
     IdentitiesOnly yes
+    SetEnv TERM=xterm-256color
 
 Host nas
     Hostname {{ (index (bitwarden "item" "NAS SSH").login.uris 0).uri }}
     HostKeyAlgorithms=+ssh-rsa
     User {{ (bitwarden "item" "NAS SSH").login.username }}
     Port {{ (bitwardenFields "item" "NAS SSH").port.value }}
+    SetEnv TERM=xterm-256color

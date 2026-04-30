@@ -7,3 +7,5 @@ Session.vim
 .mutmut-cache/
 .DS_Store
 sonar-project.properties
+
+**/.claude/settings.local.json

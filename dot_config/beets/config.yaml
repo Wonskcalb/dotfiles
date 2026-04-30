@@ -1,9 +1,8 @@
-plugins: beatport4 musicbrainz chroma
+plugins: beatport4 musicbrainz duplicates
 
 import:
   write: yes
   move: yes
 
-
 match:
-    strong_rec_thresh: 0.12
+    strong_rec_thresh: 0.2
