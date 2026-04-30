@@ -10,6 +10,8 @@ return {
         ["N"]     = { "Nzz", desc = "Jump to previous search result and center" },
         ["<c-u>"] = { "<c-u>zz", desc = "Scroll half-page up and center cursor" },
         ["<c-d>"] = { "<c-d>zz", desc = "Scroll half-page down and center cursor" },
+        ["<leader>j"] = { function() require("astrocore.buffer").nav(-vim.v.count1) end, desc = "Previous buffer" },
+        ["<leader>k"] = { function() require("astrocore.buffer").nav(vim.v.count1) end,  desc = "Next buffer" },
       },
 
       v = {
