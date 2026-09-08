@@ -42,3 +42,4 @@ packages:
       - 'ghostty'
       - 'orbstack'
       - 'Arc'
+      - 'claude-code'

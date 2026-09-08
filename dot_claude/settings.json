@@ -8,5 +8,6 @@
     "pyright-lsp@claude-plugins-official": true
   },
   "theme": "dark-daltonized",
-  "editorMode": "vim"
+  "editorMode": "vim",
+  "tui": "fullscreen"
 }
