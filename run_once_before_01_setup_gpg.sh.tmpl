@@ -1,5 +1,5 @@
- 
 #!/bin/sh
+set +x
 
 {{- if .isWorkMachine }}
 
@@ -27,6 +27,9 @@ fi
 
 
 # Export public key for GitHub/GitLab
+
+KEY_ID=$(gpg --with-colons --keyid-format LONG --list-secret-keys "{{ .workEmail }}" \
+  | awk -F: '/^sec/ {print $5; exit}')
 PUBKEY_FILE="$HOME/.gnupg/{{ .workEmail }}.pubkey.asc"
 gpg --armor --export "$KEY_ID" > "$PUBKEY_FILE"
 echo "Exported public GPG key to $PUBKEY_FILE"
